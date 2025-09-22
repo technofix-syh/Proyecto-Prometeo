@@ -30,8 +30,9 @@ Este es un proyecto colosal que requiere la ayuda de la comunidad. ¡Todas las h
 - **Desarrolladores de Kernel y Low-Level:** Esta es nuestra necesidad principal.
 - **Documentadores:** Ayuda a hacer este proyecto comprensible para todos.
 - **Diseñadores y Testers:** Tu feedback es crucial.
+- **Apoyo Financiero:** Las donaciones ayudan con costos de infraestructura ([ver DONATIONS.md](DONATIONS.md)).
 
-Lee [CONTRIBUTING.md](CONTRIBUTING.md) para saber cómo empezar.
+Lee [CONTRIBUTING.md](CONTRIBUTING.md) para saber cómo empezar con contribuciones técnicas.
 
 ## 📄 Licencia
 
