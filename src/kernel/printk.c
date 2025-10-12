@@ -1,5 +1,5 @@
 /* Sistema de logging básico para el kernel */
-#include <kernel/printk.h>
+#include <printk.h>
 
 // Driver básico de video (modo texto VGA)
 static volatile char* video_memory = (volatile char*)0xb8000;
