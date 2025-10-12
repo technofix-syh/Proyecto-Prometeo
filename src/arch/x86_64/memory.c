@@ -1,5 +1,5 @@
 /* Inicialización básica de memoria x86_64 */
-#include <arch/x86_64/memory.h>
+#include <memory.h>
 
 void x86_64_memory_init(void) 
 {
