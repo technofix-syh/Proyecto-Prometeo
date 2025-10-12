@@ -1,7 +1,7 @@
 /* Punto de entrada principal del kernel */
-#include <kernel/printk.h>
-#include <arch/x86_64/cpu.h>
-#include <arch/x86_64/memory.h>
+#include <printk.h>
+#include <cpu.h>
+#include <memory.h>
 
 void kernel_main(void) 
 {
