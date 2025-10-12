@@ -1,30 +1,50 @@
-# Makefile para el Proyecto Prometeo
+# 🔥 Makefile del Proyecto Prometeo - Corregido 🔥
+# Configuración del compilador y banderas
+CC := gcc
+ASM := nasm
+CFLAGS := -ffreestanding -nostdlib -nostdinc -fno-builtin -fno-stack-protector -m32 -I./src/include -I./src/lib
+ASMFLAGS := -f elf32
+LDFLAGS := -T linker.ld -melf_i386
 
-.PHONY: all clean run deps
+# 📁 Archivos objeto a generar
+OBJS := obj/kernel/multiboot2.o \
+        obj/kernel/boot.o \
+        obj/kernel/main.o \
+        obj/kernel/printk.o \
+        obj/kernel/panic.o \
+        obj/kernel/cpu/cpu.o \
+        obj/kernel/memory/memory.o \
+        obj/lib/string.o
 
-all:
-	@./scripts/build.sh
+# 🎯 Objetivo principal
+all: bin/prometeo-kernel
 
+# 🔨 Enlazar el kernel
+bin/prometeo-kernel: $(OBJS)
+	@mkdir -p bin
+	@echo "  🔗 Enlazando el kernel..."
+	@ld $(LDFLAGS) -o $@ $^
+
+# 🛠️ Compilar archivos C
+obj/%.o: src/%.c
+	@mkdir -p $(dir $@)
+	@echo "  📄 Compilando $<..."
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+# ⚙️ Ensamblar archivos ASM
+obj/%.o: src/%.asm
+	@mkdir -p $(dir $@)
+	@echo "  📄 Ensamblando $<..."
+	@$(ASM) $(ASMFLAGS) -o $@ $<
+
+# 🧹 Limpiar archivos de compilación
 clean:
-	@echo "🧹 Limpiando archivos de build..."
-	@rm -rf build/
+	@echo "  🧹 Limpiando..."
+	@rm -rf obj bin
 
-run: all
-	@./scripts/run_qemu.sh
+# 🚀 Ejecutar en QEMU
+run: bin/prometeo-kernel
+	@echo "  🚀 Iniciando QEMU..."
+	@qemu-system-x86_64 -kernel bin/prometeo-kernel -serial stdio -no-reboot
 
-debug: all
-	@echo "🐛 Ejecutando en modo debug..."
-	@qemu-system-x86_64 -cdrom build/prometeo.iso -m 512M -serial stdio -s -S
-
-deps:
-	@echo "📦 Instalando dependencias..."
-	@sudo apt update
-	@sudo apt install -y nasm grub2-common grub-pc-bin qemu-system-x86
-
-help:
-	@echo "Targets disponibles:"
-	@echo "  all    - Compilar el kernel (por defecto)"
-	@echo "  clean  - Limpiar archivos de build"
-	@echo "  run    - Compilar y ejecutar en QEMU"
-	@echo "  debug  - Compilar y ejecutar en modo debug (GDB)"
-	@echo "  deps   - Instalar dependencias del sistema"
+.PHONY: all clean run
