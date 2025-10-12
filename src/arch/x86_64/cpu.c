@@ -1,5 +1,5 @@
 /* Inicialización básica de la CPU x86_64 */
-#include <arch/x86_64/cpu.h>
+#include <cpu.h>
 
 void x86_64_cpu_init(void) 
 {
