@@ -1,5 +1,5 @@
 /* Manejo de errores críticos del kernel */
-#include <kernel/printk.h>
+#include <printk.h>
 
 void panic(const char* message) 
 {
