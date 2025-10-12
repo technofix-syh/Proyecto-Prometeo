@@ -9,7 +9,11 @@
 #ifndef _PRINTK_H
 #define _PRINTK_H
 
-#include <stdarg.h>
+/* Definiciones básicas para reemplazar stdarg.h */
+typedef __builtin_va_list va_list;
+#define va_start(ap, param) __builtin_va_start(ap, param)
+#define va_end(ap) __builtin_va_end(ap)
+#define va_arg(ap, type) __builtin_va_arg(ap, type)
 
 /**
  * @brief Imprime un mensaje formateado en la consola del kernel
@@ -20,69 +24,20 @@
 int printk(const char *format, ...);
 
 /**
- * @brief Imprime un mensaje de emergencia (nivel más alto)
- * @param format Cadena de formato
- * @param ... Argumentos variables
- * @return Número de caracteres impresos
+ * @brief Imprime un carácter en la pantalla
+ * @param c Carácter a imprimir
  */
-int printk_emerg(const char *format, ...);
+void putchar(char c);
 
 /**
- * @brief Imprime un mensaje de alerta
- * @param format Cadena de formato
- * @param ... Argumentos variables
- * @return Número de caracteres impresos
+ * @brief Imprime una cadena de caracteres
+ * @param str Cadena a imprimir
  */
-int printk_alert(const char *format, ...);
+void puts(const char *str);
 
 /**
- * @brief Imprime un mensaje crítico
- * @param format Cadena de formato
- * @param ... Argumentos variables
- * @return Número de caracteres impresos
+ * @brief Limpia la pantalla
  */
-int printk_crit(const char *format, ...);
-
-/**
- * @brief Imprime un mensaje de error
- * @param format Cadena de formato
- * @param ... Argumentos variables
- * @return Número de caracteres impresos
- */
-int printk_err(const char *format, ...);
-
-/**
- * @brief Imprime un mensaje de advertencia
- * @param format Cadena de formato
- * @param ... Argumentos variables
- * @return Número de caracteres impresos
- */
-int printk_warning(const char *format, ...);
-
-/**
- * @brief Imprime un mensaje informativo
- * @param format Cadena de formato
- * @param ... Argumentos variables
- * @return Número de caracteres impresos
- */
-int printk_info(const char *format, ...);
-
-/**
- * @brief Imprime un mensaje de depuración
- * @param format Cadena de formato
- * @param ... Argumentos variables
- * @return Número de caracteres impresos
- */
-int printk_debug(const char *format, ...);
-
-/* Macros para facilitar el uso */
-#define pr_emerg(fmt, ...)   printk_emerg(fmt, ##__VA_ARGS__)
-#define pr_alert(fmt, ...)   printk_alert(fmt, ##__VA_ARGS__)
-#define pr_crit(fmt, ...)    printk_crit(fmt, ##__VA_ARGS__)
-#define pr_err(fmt, ...)     printk_err(fmt, ##__VA_ARGS__)
-#define pr_warning(fmt, ...) printk_warning(fmt, ##__VA_ARGS__)
-#define pr_warn(fmt, ...)    printk_warning(fmt, ##__VA_ARGS__)
-#define pr_info(fmt, ...)    printk_info(fmt, ##__VA_ARGS__)
-#define pr_debug(fmt, ...)   printk_debug(fmt, ##__VA_ARGS__)
+void clear_screen(void);
 
 #endif /* _PRINTK_H */
