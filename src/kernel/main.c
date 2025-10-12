@@ -1,25 +1,30 @@
-/* Punto de entrada principal del kernel */
-#include <printk.h>
-#include <cpu.h>
-#include <memory.h>
+/**
+ * @file main.c
+ * @brief Punto de entrada principal del kernel Prometeo
+ */
 
-void kernel_main(void) 
-{
-    // Inicializar sistema de logging
-    printk_init();
+#include "printk.h"
+
+/**
+ * @brief Punto de entrada del kernel
+ */
+void kernel_main(void) {
+    // Limpiar pantalla
+    clear_screen();
     
-    printk("=== Proyecto Prometeo ===\n");
-    printk("Kernel booteado exitosamente!\n");
-    printk("Inicializando sistema...\n");
+    // Mostrar mensaje de boot exitoso
+    printk(">>> [PROMETEO] Kernel booteado exitosamente! <<<\n");
+    printk(">>> Version: 0.1.0 <<<\n");
+    printk(">>> Modo: 32-bit Protected Mode <<<\n");
+    printk(">>> Memoria video: 0x%x <<<\n", 0xB8000);
+    printk(">>> Proyecto Prometeo - Unificando ecosistemas <<<\n\n");
     
-    // Inicializar arquitectura x86_64
-    x86_64_cpu_init();
-    x86_64_memory_init();
+    // Mensaje de celebración
+    printk("*** EL FUEGO DE PROMETEO SE HA ENCENDIDO! ***\n");
+    printk("*** Boot exitoso - Meta-kernel activo ***\n");
     
-    printk("Sistema inicializado. Entrando en loop principal...\n");
-    
-    // Loop principal del kernel
+    // Loop infinito
     while (1) {
-        asm volatile ("hlt");
+        // El kernel está ejecutándose exitosamente
     }
 }
