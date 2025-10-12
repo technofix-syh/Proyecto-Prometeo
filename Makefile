@@ -6,14 +6,14 @@ CFLAGS := -ffreestanding -nostdlib -nostdinc -fno-builtin -fno-stack-protector -
 ASMFLAGS := -f elf32
 LDFLAGS := -T linker.ld -melf_i386
 
-# 📁 Archivos objeto a generar (RUTAS CORREGIDAS)
+# 📁 Archivos objeto a generar (RUTAS CORREGIDAS SEGÚN TU ESTRUCTURA)
 OBJS := obj/boot/multiboot2.o \
         obj/boot/boot.o \
         obj/kernel/main.o \
         obj/kernel/printk.o \
         obj/kernel/panic.o \
-        obj/kernel/cpu/cpu.o \
-        obj/kernel/memory/memory.o \
+        obj/arch/x86_64/cpu.o \
+        obj/arch/x86_64/memory.o \
         obj/lib/string.o
 
 # 🎯 Objetivo principal
