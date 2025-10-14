@@ -54,6 +54,31 @@ void puts(const char *str) {
 }
 
 /**
+ * @brief Implementación básica de printk
+ * @param str Cadena a imprimir
+ */
+void printk(const char *str) {
+    puts(str);
+}            video_memory[i] = video_memory[i + 80];
+        }
+        for (int i = 80 * 24; i < 80 * 25; i++) {
+            video_memory[i] = (0x07 << 8) | ' ';
+        }
+        cursor_pos = 80 * 24;
+    }
+}
+
+/**
+ * @brief Imprime una cadena de caracteres
+ * @param str Cadena a imprimir
+ */
+void puts(const char *str) {
+    while (*str) {
+        putchar(*str++);
+    }
+}
+
+/**
  * @brief Convierte un número a string en base específica
  * @param value Número a convertir
  * @param buffer Buffer donde guardar el string
