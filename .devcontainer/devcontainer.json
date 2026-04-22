@@ -1,10 +1,10 @@
 {
     "name": "Prometeo Kernel Dev",
-    "image": "mcr.microsoft.com/devcontainers/base:ubuntu", // Una imagen base de Linux
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
     "features": {
         "ghcr.io/devcontainers/features/github-cli:1": {}
     },
-    "postCreateCommand": "sudo apt update && sudo apt install -y nasm gcc-multilib", // Comando que se ejecuta al crear el entorno
+    "postCreateCommand": "sudo apt update && sudo apt install -y nasm gcc-multilib qemu-system-x86",
     "customizations": {
         "vscode": {
             "extensions": [
