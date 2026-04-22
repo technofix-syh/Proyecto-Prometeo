@@ -1,15 +1,8 @@
-/* Manejo de errores críticos del kernel */
-#include <printk.h>
+#include "printk.h"
 
-void panic(const char* message) 
-{
-    printk("*** KERNEL PANIC ***\n");
-    printk("Error: ");
-    printk(message);
-    printk("\nSistema detenido.\n");
-    
-    // Detener el sistema
-    while (1) {
-        asm volatile ("hlt");
-    }
+void panic(const char *msg) {
+    printk("KERNEL PANIC: ");
+    printk(msg);
+    printk("\n");
+    while (1);
 }
