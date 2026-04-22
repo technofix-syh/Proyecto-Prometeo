@@ -1,30 +1,20 @@
-/* Funciones básicas de manejo de strings */
-#include <lib/string.h>
+#include "lib/string.h"
 
-size_t strlen(const char* str) 
-{
-    size_t len = 0;
-    while (str[len] != '\0') {
-        len++;
-    }
-    return len;
-}
-
-void* memset(void* ptr, int value, size_t num) 
-{
-    unsigned char* p = (unsigned char*)ptr;
-    for (size_t i = 0; i < num; i++) {
-        p[i] = (unsigned char)value;
-    }
-    return ptr;
-}
-
-void* memcpy(void* dest, const void* src, size_t num) 
-{
-    unsigned char* d = (unsigned char*)dest;
-    const unsigned char* s = (const unsigned char*)src;
-    for (size_t i = 0; i < num; i++) {
-        d[i] = s[i];
-    }
+void *memset(void *dest, int val, size_t n) {
+    unsigned char *p = dest;
+    while (n--) *p++ = (unsigned char)val;
     return dest;
+}
+
+void *memcpy(void *dest, const void *src, size_t n) {
+    unsigned char *d = dest;
+    const unsigned char *s = src;
+    while (n--) *d++ = *s++;
+    return dest;
+}
+
+size_t strlen(const char *s) {
+    size_t len = 0;
+    while (*s++) len++;
+    return len;
 }
